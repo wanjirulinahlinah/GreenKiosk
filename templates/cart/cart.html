@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(224, 236, 245);
+            margin: 0;
+            padding: 0;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            display: flex;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-buttons {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .cart-item-buttons a {
+            background-color: #f53c3c;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: #fff;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div class="cart-container">
+
+    
+        {% for cart_item in cart_items %}
+            <div class="cart-item">
+
+                <img src="{{product.image.url}}" alt="{{product.name}}" class="images"/>
+                <div class="cart-item-details">
+                    <h2>{{ cart_item.product_name }}</h2>
+                    <p>Price: {{ cart_item.product_price }}</p>
+                    <p>Quantity: {{ cart_item.product_quantity }}</p>
+                    <p>Total Price: {{ cart_item.total_price }}</p>
+                </div>
+                <div class="cart-item-buttons">
+                    <a href="{% url 'remove_from_cart' cart_item_id=cart_item.id %}">Remove</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
